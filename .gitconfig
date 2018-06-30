@@ -1,0 +1,22 @@
+[core]
+    editor = vim
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    l = log --graph --pretty=oneline --abbrev-commit
+    d = diff --color
+    ds = diff --stat
+    co = checkout
+    sh = show --color
+    fe = fetch -p -t
+[grep]
+    extendRegexp = true
+    lineNumber = true
+[color]
+    diff = false
+    status = false
+    branch = false
+[rebase]
+    autosquash = true
+
