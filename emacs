@@ -48,6 +48,9 @@
 ;; bind vanilla emacs keystrokes
 (global-set-key (kbd "M-x") 'helm-M-x)
 
+;; ido-mode
+(require 'ido)
+(ido-mode t)
 
 ;; disable graphic features
 ;  - startup message
