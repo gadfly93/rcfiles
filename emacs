@@ -7,6 +7,7 @@
 (setq package-list '(evil
                      evil-leader
                      evil-visualstar
+                     helm
                      highlight-numbers))
 
 (package-initialize)
@@ -44,6 +45,8 @@
 ; - save buffer
 (evil-leader/set-key "," 'evil-write)
 
+;; bind vanilla emacs keystrokes
+(global-set-key (kbd "M-x") 'helm-M-x)
 
 
 ;; disable graphic features
@@ -92,6 +95,18 @@
 ;; highlight matching parenthesis
 (show-paren-mode 1)
 
+;; Verilog customizations
+(when (file-exists-p "~/veri-kompass/")
+    (add-to-list 'load-path "~/veri-kompass/")
+  (require 'veri-kompass-mode))
+(when (file-exists-p "~/midas-mode/")
+    (add-to-list 'load-path "~/midas-mode/")
+  (require 'midas-mode))
+
+;; save custom in a dedicated file and source it
+(setq custom-file "~/.emacs.d/custom.el")
+(write-region "" nil custom-file 'append)
+(load custom-file)
 
 ;; TODO
 ;; - highlight TODOs
@@ -100,3 +115,5 @@
 ;; - scrolling
 ;; - missing remaps
 ;; - modify plugin for visual select search-backwards 
+;; - handle errors in package-install
+;; - ido mode
