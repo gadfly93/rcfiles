@@ -29,7 +29,7 @@
 (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 ; allow horizontal movement to cross lines
 (setq-default evil-cross-lines t)
-; use fine grain undo
+;use fine grain undo
 ;(setq-default evil-want-fine-undo t)
 ; use default vim search 
 (evil-select-search-module 'evil-search-module 'evil-search)
@@ -52,6 +52,16 @@
 (require 'ido)
 (ido-mode t)
 
+;; window options
+; - move between windows
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+; - move in window configuration history
+(when (fboundp 'winner-mode)
+  (winner-mode 1)
+  (global-set-key (kbd "C-c C-<left>") 'winner-undo)
+  (global-set-key (kbd "C-c C-<right>") 'winner-redo))
+
 ;; disable graphic features
 ;  - startup message
 (setq inhibit-splash-screen t)
@@ -60,6 +70,16 @@
 (menu-bar-mode -1)
 ;  - toolbar
 (tool-bar-mode -1)
+
+;; scroll options
+;  - mouse scroll 2 lines at a time
+(setq mouse-wheel-scroll-amount '(2 ((shift) . 1)))
+;  - don't accelerate mouse scrolling
+(setq mouse-wheel-progressive-speed nil)
+;  - scroll window under mouse
+(setq mouse-wheel-follow-mouse 't)
+;  - keyboard scroll one line at a time
+(setq scroll-step 1)
 
 ;; color theme
 (add-to-list 'custom-theme-load-path
@@ -119,4 +139,5 @@
 ;; - missing remaps
 ;; - modify plugin for visual select search-backwards 
 ;; - handle errors in package-install
-;; - ido mode
+;; - set nowrap
+;; - add hook verilog: (define-key verilog-mode-map ";" 'self-insert-command)
