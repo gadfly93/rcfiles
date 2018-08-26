@@ -70,6 +70,8 @@
 (menu-bar-mode -1)
 ;  - toolbar
 (tool-bar-mode -1)
+;  - scroll bars
+(scroll-bar-mode -1)
 
 ;; scroll options
 ;  - mouse scroll 2 lines at a time
