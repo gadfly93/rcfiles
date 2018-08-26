@@ -135,7 +135,8 @@
   `(js2-external-variable-face ((,class (:foreground ,orange2))))
 
   ;; linum-mode
-  `(linum ((,class (:foreground ,aluminium5 :background "#000000"))))
+  `(line-number ((,class (:foreground ,aluminium5))))
+  `(linum ((,class (:foreground ,aluminium5))))
 
   ;; magit
   `(magit-section-title ((,class (:inherit strong-face))))
