@@ -170,7 +170,10 @@
 
   ;; show-paren
   `(show-paren-mismatch ((,class (:foreground ,aluminium1 :weight bold :background ,aluminium3))))
-  `(show-paren-match ((,class (:foreground ,aluminium1 :weight bold :background ,aluminium3))))
-))
+  `(show-paren-match ((,class (:foreground ,aluminium1 :weight bold :background ,aluminium3)))))
+
+  (custom-theme-set-variables
+   'oblivion
+   `(ansi-color-names-vector ["black" "red1" "green3" "yellow2" "skyblue2" "magenta3" "cyan4" "aluminium1"])))
 
 (provide-theme 'oblivion)
