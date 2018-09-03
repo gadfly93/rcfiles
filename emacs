@@ -39,6 +39,9 @@
 (define-key evil-normal-state-map (kbd "SPC") 'evil-ex-nohighlight)
 ; allow to search visual selection
 (global-evil-visualstar-mode)
+; make region selection override search highlight:
+; modify lisp/simple.el : redisplay-highlight-region-function
+;   (overlay-put nrol 'priority '(10000 . 100)
 ; setup leader
 (setq evil-leader/in-all-states 1)
 (global-evil-leader-mode)
@@ -71,7 +74,6 @@
     (size-h 9 -1 :right) " "
     (mode 16 16 :left :elide) " "
     filename-and-process)))
-
 
 ;; window options
 ; - move between windows
@@ -123,7 +125,7 @@
           (set-face-background 'default "unspecified-bg" (selected-frame))))
 (add-hook 'window-setup-hook 'on-after-init)
 
-;; customize look in programming mode:
+;; customize programming mode:
 (add-hook 'prog-mode-hook 'highlight-numbers-mode)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'column-number-mode)
@@ -164,5 +166,4 @@
 ;; - set spellcheck
 ;; - missing remaps
 ;; - modify plugin for visual select search-backwards (?)
-;; - set nowrap
 ;; - add hook verilog: (define-key verilog-mode-map ";" 'self-insert-command)
