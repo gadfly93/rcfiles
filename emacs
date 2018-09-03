@@ -8,16 +8,18 @@
                      evil-leader
                      evil-visualstar
                      helm
-                     highlight-numbers))
+                     highlight-numbers
+                     magit
+                     undo-tree))
 
 (package-initialize)
 
-(or (file-exists-p package-user-dir) (package-refresh-contents))
-
-;; install must-to-have packages if not present
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+;; check and install packages
+(with-demoted-errors
+  (when (or (file-exists-p package-user-dir) (package-refresh-contents))
+    (dolist (package package-list)
+      (unless (package-installed-p package)
+        (package-install package)))))
 
 ;; evil mode
 (require 'evil)
@@ -86,7 +88,6 @@
 ;; color theme
 (add-to-list 'custom-theme-load-path
   (file-name-as-directory "~/.emacs.d/themes/"))
-
 (load-theme 'oblivion t t)
 (enable-theme 'oblivion)
 
