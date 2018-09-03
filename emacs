@@ -32,7 +32,7 @@
 ; allow horizontal movement to cross lines
 (setq-default evil-cross-lines t)
 ;use fine grain undo
-;(setq-default evil-want-fine-undo t)
+(setq-default evil-want-fine-undo t)
 ; use default vim search 
 (evil-select-search-module 'evil-search-module 'evil-search)
 ; space remove search highlight
@@ -53,6 +53,25 @@
 ;; ido-mode
 (require 'ido)
 (ido-mode t)
+
+;; ibuffer
+(require 'ibuffer)
+; - size filed format
+(define-ibuffer-column size-h
+  (:name "Size" :inline t)
+  (cond
+    ((> (buffer-size) 1000000000) (format "%7.1fG" (/ (buffer-size) 1000000000.0)))
+    ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
+    ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
+    (t (format "%8d" (buffer-size)))))
+; - customize column size
+(setq ibuffer-formats
+  '((mark modified read-only " "
+    (name 30 30 :left :nil) " "
+    (size-h 9 -1 :right) " "
+    (mode 16 16 :left :elide) " "
+    filename-and-process)))
+
 
 ;; window options
 ; - move between windows
@@ -75,6 +94,13 @@
 ;  - scroll bars
 (scroll-bar-mode -1)
 
+;; confirm before closing
+(setq confirm-kill-emacs 'y-or-n-p)
+
+;; ask y/n instead of yes/no
+(fset 'yes-or-no-p 'y-or-n-p)
+
+
 ;; scroll options
 ;  - mouse scroll 2 lines at a time
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1)))
@@ -91,7 +117,7 @@
 (load-theme 'oblivion t t)
 (enable-theme 'oblivion)
 
-; do not set the background when opened in terminal
+;; do not set the background when opened in terminal
 (defun on-after-init ()
     (unless (display-graphic-p (selected-frame))
           (set-face-background 'default "unspecified-bg" (selected-frame))))
@@ -101,6 +127,7 @@
 (add-hook 'prog-mode-hook 'highlight-numbers-mode)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'prog-mode-hook 'column-number-mode)
+(add-hook 'prog-mode-hook (lambda () (setq truncate-lines t)))
 
 ;; do not create backup/autosave files
 (setq make-backup-files nil)
@@ -116,8 +143,6 @@
 ;  - indentation is done with C-tab
 (add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "<C-tab>") 'indent-for-tab-command)))
 
-;; do not wrap long lines
-(global-visual-line-mode t)
 ;; highlight matching parenthesis
 (show-paren-mode 1)
 
@@ -137,10 +162,7 @@
 ;; TODO
 ;; - highlight TODOs
 ;; - set spellcheck
-;; - dump custom to separate custom.el 
-;; - scrolling
 ;; - missing remaps
-;; - modify plugin for visual select search-backwards 
-;; - handle errors in package-install
+;; - modify plugin for visual select search-backwards (?)
 ;; - set nowrap
 ;; - add hook verilog: (define-key verilog-mode-map ";" 'self-insert-command)
