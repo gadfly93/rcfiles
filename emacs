@@ -124,9 +124,9 @@
 (when (file-exists-p "~/veri-kompass/")
     (add-to-list 'load-path "~/veri-kompass/")
   (require 'veri-kompass-mode))
-(when (file-exists-p "~/midas-mode/")
-    (add-to-list 'load-path "~/midas-mode/")
-  (require 'midas-mode))
+(when (file-exists-p "~/midas/etc/SMIME/")
+    (add-to-list 'load-path "~/midas/etc/SMIME/")
+  (require 'smime))
 
 ;; save custom in a dedicated file and source it
 (setq custom-file "~/.emacs.d/custom.el")
