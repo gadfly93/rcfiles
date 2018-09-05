@@ -149,9 +149,21 @@
 (show-paren-mode 1)
 
 ;; Verilog customizations
+; - disable automatic indentation
+(defun ret-indent-relative ()
+  (interactive)
+  (newline)
+  (indent-relative-maybe))
+(eval-after-load 'verilog-mode
+  '(progn
+    (define-key verilog-mode-map (kbd ";") 'self-insert-command)
+    (define-key verilog-mode-map (kbd "RET") 'ret-indent-relative)
+    (define-key verilog-mode-map (kbd "TAB") 'tab-to-tab-stop)))
+; - load veri-kompass
 (when (file-exists-p "~/veri-kompass/")
     (add-to-list 'load-path "~/veri-kompass/")
   (require 'veri-kompass-mode))
+; - load smime
 (when (file-exists-p "~/midas/etc/SMIME/")
     (add-to-list 'load-path "~/midas/etc/SMIME/")
   (require 'smime))
