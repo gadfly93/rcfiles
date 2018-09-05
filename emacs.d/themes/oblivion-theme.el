@@ -170,7 +170,7 @@
 
   ;; show-paren
   `(show-paren-mismatch ((,class (:foreground ,aluminium1 :weight bold :background ,aluminium3))))
-  `(show-paren-match ((,class (:foreground ,aluminium1 :weight bold :background ,aluminium3)))))
+  `(show-paren-match ((,class (:foreground ,aluminium1 :weight bold :background ,plum1)))))
 
   (custom-theme-set-variables
    'oblivion
