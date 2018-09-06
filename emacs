@@ -49,6 +49,13 @@
 ; leader mappings:
 ; - save buffer
 (evil-leader/set-key "," 'evil-write)
+; - toggle underscore syntax meaning
+(defun toggle-underscore-syntax ()
+  (interactive)
+  (if (char-equal (char-syntax ?_) ?_)
+    (modify-syntax-entry ?_ "w")
+    (modify-syntax-entry ?_ "_")))
+(evil-leader/set-key "_" 'toggle-underscore-syntax)
 
 ;; bind vanilla emacs keystrokes
 (global-set-key (kbd "M-x") 'helm-M-x)
@@ -177,5 +184,3 @@
 ;; - highlight TODOs
 ;; - set spellcheck
 ;; - missing remaps
-;; - modify plugin for visual select search-backwards (?)
-;; - add hook verilog: (define-key verilog-mode-map ";" 'self-insert-command)
