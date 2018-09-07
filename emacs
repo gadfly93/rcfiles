@@ -91,6 +91,11 @@
   (winner-mode 1)
   (global-set-key (kbd "C-c C-<left>") 'winner-undo)
   (global-set-key (kbd "C-c C-<right>") 'winner-redo))
+; - resize windows
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
 ;; disable graphic features
 ;  - startup message
