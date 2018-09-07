@@ -64,8 +64,16 @@
 (require 'ido)
 (ido-mode t)
 
+;; dired
+(setq dired-listing-switches "-alh")
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+
 ;; ibuffer
 (require 'ibuffer)
+; - make default buffer listing
+(defalias 'list-buffers 'ibuffer)
+; - auto-refresh
+(add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
 ; - size filed format
 (define-ibuffer-column size-h
   (:name "Size" :inline t)
@@ -73,6 +81,7 @@
     ((> (buffer-size) 1000000000) (format "%7.1fG" (/ (buffer-size) 1000000000.0)))
     ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
     ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
+
     (t (format "%8d" (buffer-size)))))
 ; - customize column size
 (setq ibuffer-formats
@@ -107,6 +116,9 @@
 (tool-bar-mode -1)
 ;  - scroll bars
 (scroll-bar-mode -1)
+
+;; auto revert mode
+(global-auto-revert-mode 1)
 
 ;; confirm before closing
 (setq confirm-kill-emacs 'y-or-n-p)
