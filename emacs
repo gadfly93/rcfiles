@@ -126,6 +126,8 @@
 ;; ask y/n instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; do not pop up dialog boxes even if running with gui
+(setq use-dialog-box nil)
 
 ;; scroll options
 ;  - mouse scroll 2 lines at a time
@@ -165,6 +167,7 @@
 ;  - tabulation is two spaces
 (setq-default tab-width 2)
 ;  - tab key inserts tabulation  
+(add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
 (add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "<tab>") 'tab-to-tab-stop)))
 ;  - indentation is done with C-tab
 (add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "<C-tab>") 'indent-for-tab-command)))
