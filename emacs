@@ -6,6 +6,7 @@
 ;; list of must-to-have packages
 (setq package-list '(ace-jump-mode
                      avy
+                     command-log-mode
                      evil
                      evil-leader
                      evil-visualstar
