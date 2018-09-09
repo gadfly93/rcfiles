@@ -24,6 +24,10 @@
       (unless (package-installed-p package)
         (package-install package)))))
 
+;; load local path
+(when (file-exists-p "~/.emacs.d/lisp/")
+    (add-to-list 'load-path "~/.emacs.d/lisp/"))
+
 ;; evil mode
 ; set variables needed before loading evil
 ; - use fine grain undo
@@ -37,7 +41,7 @@
 (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 ; allow horizontal movement to cross lines
 (setq-default evil-cross-lines t)
-; use default vim search 
+; use default vim search
 (evil-select-search-module 'evil-search-module 'evil-search)
 ; space remove search highlight
 (define-key evil-motion-state-map (kbd "SPC") 'evil-ex-nohighlight)
@@ -70,6 +74,7 @@
 
 ;; ido-mode
 (require 'ido)
+(require 'ido-other-window)
 (ido-mode t)
 
 ;; dired
@@ -174,7 +179,7 @@
 (setq-default indent-tabs-mode nil)
 ;  - tabulation is two spaces
 (setq-default tab-width 2)
-;  - tab key inserts tabulation  
+;  - tab key inserts tabulation
 (add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "TAB") 'tab-to-tab-stop)))
 (add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "<tab>") 'tab-to-tab-stop)))
 ;  - indentation is done with C-tab
