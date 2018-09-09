@@ -24,6 +24,11 @@
         (package-install package)))))
 
 ;; evil mode
+; set variables needed before loading evil
+; - use fine grain undo
+(setq evil-want-fine-undo t)
+; - Y yanks to end of line
+(setq evil-want-Y-yank-to-eol t)
 (require 'evil)
 (evil-mode t)
 ; movements take into account visual line
@@ -33,8 +38,6 @@
 (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 ; allow horizontal movement to cross lines
 (setq-default evil-cross-lines t)
-; use fine grain undo
-(setq-default evil-want-fine-undo t)
 ; use default vim search 
 (evil-select-search-module 'evil-search-module 'evil-search)
 ; space remove search highlight
