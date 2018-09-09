@@ -4,7 +4,9 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
 
 ;; list of must-to-have packages
-(setq package-list '(evil
+(setq package-list '(ace-jump-mode
+                     avy
+                     evil
                      evil-leader
                      evil-visualstar
                      helm
@@ -31,7 +33,7 @@
 (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 ; allow horizontal movement to cross lines
 (setq-default evil-cross-lines t)
-;use fine grain undo
+; use fine grain undo
 (setq-default evil-want-fine-undo t)
 ; use default vim search 
 (evil-select-search-module 'evil-search-module 'evil-search)
@@ -56,8 +58,12 @@
     (modify-syntax-entry ?_ "w")
     (modify-syntax-entry ?_ "_")))
 (evil-leader/set-key "_" 'toggle-underscore-syntax)
+; - avy/ace-jump mappings
+(evil-leader/set-key "c" 'evil-avy-goto-char) ; evil-ace-jump-char-mode
+(evil-leader/set-key "w" 'evil-avy-goto-subword-1) ; evil-ace-jump-word-mode
+(evil-leader/set-key "l" 'evil-avy-goto-line) ; evil-ace-jump-line-mode
 
-;; bind vanilla emacs keystrokes
+;; helm
 (global-set-key (kbd "M-x") 'helm-M-x)
 
 ;; ido-mode
