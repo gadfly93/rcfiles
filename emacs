@@ -65,9 +65,9 @@
     (modify-syntax-entry ?_ "_")))
 (evil-leader/set-key "_" 'toggle-underscore-syntax)
 ; - avy/ace-jump mappings
-(evil-leader/set-key "c" 'evil-avy-goto-char) ; evil-ace-jump-char-mode
-(evil-leader/set-key "w" 'evil-avy-goto-subword-1) ; evil-ace-jump-word-mode
-(evil-leader/set-key "l" 'evil-avy-goto-line) ; evil-ace-jump-line-mode
+(evil-leader/set-key "c" 'evil-ace-jump-char-mode) ; evil-avy-goto-char
+(evil-leader/set-key "w" 'evil-ace-jump-word-mode) ; evil-avy-goto-subword-1
+(evil-leader/set-key "l" 'evil-ace-jump-line-mode) ; evil-avy-goto-line
 
 ;; helm
 (global-set-key (kbd "M-x") 'helm-M-x)
