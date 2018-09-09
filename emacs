@@ -33,8 +33,6 @@
 (require 'evil)
 (evil-mode t)
 ; movements take into account visual line
-(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 ; allow horizontal movement to cross lines
@@ -42,7 +40,7 @@
 ; use default vim search 
 (evil-select-search-module 'evil-search-module 'evil-search)
 ; space remove search highlight
-(define-key evil-normal-state-map (kbd "SPC") 'evil-ex-nohighlight)
+(define-key evil-motion-state-map (kbd "SPC") 'evil-ex-nohighlight)
 ; allow to search visual selection
 (global-evil-visualstar-mode)
 ; make region selection override search highlight:
