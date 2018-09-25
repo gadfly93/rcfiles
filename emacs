@@ -199,6 +199,7 @@
     (define-key verilog-mode-map (kbd ";") 'self-insert-command)
     (define-key verilog-mode-map (kbd "RET") 'ret-indent-relative)
     (define-key verilog-mode-map (kbd "TAB") 'tab-to-tab-stop)))
+(add-hook 'verilog-mode-hook '(lambda () (setq-local evil-auto-indent nil)))
 ; - load veri-kompass
 (when (file-exists-p "~/veri-kompass/")
     (add-to-list 'load-path "~/veri-kompass/")
@@ -207,6 +208,15 @@
 (when (file-exists-p "~/midas/etc/SMIME/")
     (add-to-list 'load-path "~/midas/etc/SMIME/")
   (require 'smime))
+
+;; Shell customizations
+; - clean shell and reset compilation mode
+(defun shell-clean ()
+  (interactive)
+  (delete-region (point-min) (point-max))
+  (fundamental-mode)
+  (shell-mode)
+  (compilation-shell-minor-mode))
 
 ;; save custom in a dedicated file and source it
 (setq custom-file "~/.emacs.d/custom.el")
@@ -217,3 +227,8 @@
 ;; - highlight TODOs
 ;; - set spellcheck
 ;; - missing remaps
+;; - customize search using highlight regex
+;; - projectile
+;; - rectangular selection
+;; - ibuffer list customization
+;; - autocomplete
