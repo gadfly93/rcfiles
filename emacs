@@ -164,6 +164,9 @@
 ;; do not pop up dialog boxes even if running with gui
 (setq use-dialog-box nil)
 
+;; increase garbage collection threshold to 20MB
+(setq gc-cons-threshold 20000000)
+
 ;; scroll options
 ;  - mouse scroll 2 lines at a time
 (setq mouse-wheel-scroll-amount '(2 ((shift) . 1)))
