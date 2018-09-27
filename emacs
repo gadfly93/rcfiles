@@ -71,6 +71,12 @@
 
 ;; helm
 (global-set-key (kbd "M-x") 'helm-M-x)
+; - always open helm buffers in a bottom split
+(add-to-list 'display-buffer-alist
+  `(,(rx bos "*helm" (* not-newline) "*" eos)
+     (display-buffer-in-side-window)
+     (inhibit-same-window . t)
+     (window-height . 0.4)))
 
 ;; ido-mode
 (require 'ido)
