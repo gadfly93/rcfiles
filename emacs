@@ -80,14 +80,12 @@
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 ; - move in window configuration history
 (when (fboundp 'winner-mode)
-  (winner-mode 1)
-  (global-set-key (kbd "C-c C-<left>") 'winner-undo)
-  (global-set-key (kbd "C-c C-<right>") 'winner-redo))
+  (winner-mode 1))
 ; - rotate/flip splits in current frame
 (when (fboundp 'transpose-frame)
-  (global-set-key (kbd "C-c S-<up>") 'flip-frame)
-  (global-set-key (kbd "C-c S-<left>") 'flop-frame)
-  (global-set-key (kbd "C-c S-<right>") 'rotate-frame-clockwise))
+  (global-set-key (kbd "C-c C-<up>") 'flip-frame)
+  (global-set-key (kbd "C-c C-<left>") 'flop-frame)
+  (global-set-key (kbd "C-c C-<right>") 'rotate-frame-clockwise))
 
 ;; evil mode
 ; set variables needed before loading evil
@@ -244,8 +242,9 @@
 ;; TODO
 ;; - highlight TODOs
 ;; - set spellcheck
-;; - projectile (?)
 ;; - rectangular selection
 ;; - ibuffer list customization
 ;; - autocomplete
 ;; - multiple cursors: evil-mc
+;; - projectile ?
+;; - undo-tree-mode ?
