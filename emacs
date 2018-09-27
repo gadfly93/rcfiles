@@ -133,6 +133,9 @@
 ;; auto revert mode
 (global-auto-revert-mode 1)
 
+;; move cursor to help window when opened
+(setq help-window-select t)
+
 ;; confirm before closing
 (setq confirm-kill-emacs 'y-or-n-p)
 
@@ -187,6 +190,7 @@
 
 ;; highlight matching parenthesis
 (show-paren-mode 1)
+(setq show-paren-delay 0)
 
 ;; Verilog customizations
 ; - disable automatic indentation
