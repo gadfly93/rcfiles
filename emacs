@@ -44,13 +44,21 @@
 (setq-default evil-cross-lines t)
 ; use default vim search
 (evil-select-search-module 'evil-search-module 'evil-search)
-; space remove search highlight
-(define-key evil-motion-state-map (kbd "SPC") 'evil-ex-nohighlight)
 ; allow to search visual selection
 (global-evil-visualstar-mode)
-; make region selection override search highlight:
-; modify lisp/simple.el : redisplay-highlight-region-function
-;   (overlay-put nrol 'priority '(10000 . 100)
+; use faces instead of overlays for search highlight
+; as they properly handle editing and region select
+(defun evil-ex-hl-active-overlay-to-face (&optional unused1 unused2)
+  (when (evil-ex-hl-active-p 'evil-ex-search)
+    (evil-ex-delete-hl 'evil-ex-search)
+    (highlight-regexp (evil-ex-pattern-regex evil-ex-search-pattern) 'lazy-highlight)))
+(advice-add 'evil-ex-start-search :after #'evil-ex-hl-active-overlay-to-face)
+(advice-add 'evil-ex-search :after #'evil-ex-hl-active-overlay-to-face)
+; spacebar removes highlight
+(defun unhighlight-last ()
+  (interactive)
+  (unhighlight-regexp (caar hi-lock-interactive-patterns)))
+(define-key evil-motion-state-map (kbd "SPC") 'unhighlight-last)
 ; setup leader
 (setq evil-leader/in-all-states 1)
 (global-evil-leader-mode)
@@ -241,9 +249,8 @@
 ;; TODO
 ;; - highlight TODOs
 ;; - set spellcheck
-;; - missing remaps
-;; - customize search using highlight regex
 ;; - projectile
 ;; - rectangular selection
 ;; - ibuffer list customization
 ;; - autocomplete
+;; - multiple cursors: evil-mc
