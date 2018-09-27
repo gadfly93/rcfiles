@@ -29,6 +29,66 @@
 (when (file-exists-p "~/.emacs.d/lisp/")
   (add-to-list 'load-path "~/.emacs.d/lisp/"))
 
+;; disable graphic features
+;  - startup message
+(setq inhibit-splash-screen t)
+(setq inhibit-startup-message t)
+;  - menu bar
+(menu-bar-mode -1)
+;  - toolbar
+(tool-bar-mode -1)
+;  - scroll bars
+(scroll-bar-mode -1)
+
+;; auto revert mode
+(global-auto-revert-mode 1)
+;; move cursor to help window when opened
+(setq help-window-select t)
+;; confirm before closing
+(setq confirm-kill-emacs 'y-or-n-p)
+;; ask y/n instead of yes/no
+(fset 'yes-or-no-p 'y-or-n-p)
+;; do not pop up dialog boxes even if running with gui
+(setq use-dialog-box nil)
+;; increase garbage collection threshold to 20MB
+(setq gc-cons-threshold 20000000)
+;; do not create backup/autosave files
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+;; highlight matching parenthesis
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+
+;; scroll options
+;  - mouse scroll 2 lines at a time
+(setq mouse-wheel-scroll-amount '(2 ((shift) . 1)))
+;  - don't accelerate mouse scrolling
+(setq mouse-wheel-progressive-speed nil)
+;  - scroll window under mouse
+(setq mouse-wheel-follow-mouse 't)
+;  - keyboard scroll one line at a time
+(setq scroll-step 1)
+
+;; window options
+; - move between windows
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+; - resize windows
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
+; - move in window configuration history
+(when (fboundp 'winner-mode)
+  (winner-mode 1)
+  (global-set-key (kbd "C-c C-<left>") 'winner-undo)
+  (global-set-key (kbd "C-c C-<right>") 'winner-redo))
+; - rotate/flip splits in current frame
+(when (fboundp 'transpose-frame)
+  (global-set-key (kbd "C-c S-<up>") 'flip-frame)
+  (global-set-key (kbd "C-c S-<left>") 'flop-frame)
+  (global-set-key (kbd "C-c S-<right>") 'rotate-frame-clockwise))
+
 ;; evil mode
 ; set variables needed before loading evil
 ; - use fine grain undo
@@ -118,86 +178,16 @@
     (mode 16 16 :left :elide) " "
     filename-and-process)))
 
-;; window options
-; - move between windows
-(when (fboundp 'windmove-default-keybindings)
-  (windmove-default-keybindings))
-; - resize windows
-(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "S-C-<down>") 'shrink-window)
-(global-set-key (kbd "S-C-<up>") 'enlarge-window)
-; - move in window configuration history
-(when (fboundp 'winner-mode)
-  (winner-mode 1)
-  (global-set-key (kbd "C-c C-<left>") 'winner-undo)
-  (global-set-key (kbd "C-c C-<right>") 'winner-redo))
-; - rotate/flip splits in current frame
-(when (fboundp 'transpose-frame)
-  (global-set-key (kbd "C-c S-<up>") 'flip-frame)
-  (global-set-key (kbd "C-c S-<left>") 'flop-frame)
-  (global-set-key (kbd "C-c S-<right>") 'rotate-frame-clockwise))
-
-;; disable graphic features
-;  - startup message
-(setq inhibit-splash-screen t)
-(setq inhibit-startup-message t)
-;  - menu bar
-(menu-bar-mode -1)
-;  - toolbar
-(tool-bar-mode -1)
-;  - scroll bars
-(scroll-bar-mode -1)
-
-;; auto revert mode
-(global-auto-revert-mode 1)
-
-;; move cursor to help window when opened
-(setq help-window-select t)
-
-;; confirm before closing
-(setq confirm-kill-emacs 'y-or-n-p)
-
-;; ask y/n instead of yes/no
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; do not pop up dialog boxes even if running with gui
-(setq use-dialog-box nil)
-
-;; increase garbage collection threshold to 20MB
-(setq gc-cons-threshold 20000000)
-
-;; scroll options
-;  - mouse scroll 2 lines at a time
-(setq mouse-wheel-scroll-amount '(2 ((shift) . 1)))
-;  - don't accelerate mouse scrolling
-(setq mouse-wheel-progressive-speed nil)
-;  - scroll window under mouse
-(setq mouse-wheel-follow-mouse 't)
-;  - keyboard scroll one line at a time
-(setq scroll-step 1)
-
 ;; color theme
 (add-to-list 'custom-theme-load-path
   (file-name-as-directory "~/.emacs.d/themes/"))
 (load-theme 'oblivion t t)
 (enable-theme 'oblivion)
-
 ;; do not set the background when opened in terminal
 (defun on-after-init ()
   (unless (display-graphic-p (selected-frame))
     (set-face-background 'default "unspecified-bg" (selected-frame))))
 (add-hook 'window-setup-hook 'on-after-init)
-
-;; customize programming mode:
-(add-hook 'prog-mode-hook 'highlight-numbers-mode)
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
-(add-hook 'prog-mode-hook 'column-number-mode)
-(add-hook 'prog-mode-hook (lambda () (setq truncate-lines t)))
-
-;; do not create backup/autosave files
-(setq make-backup-files nil)
-(setq auto-save-default nil)
 
 ;; TAB:
 ;  - do not insert '\t'
@@ -210,9 +200,11 @@
 ;  - indentation is done with C-tab
 (add-hook 'prog-mode-hook (lambda () (local-set-key (kbd "<C-tab>") 'indent-for-tab-command)))
 
-;; highlight matching parenthesis
-(show-paren-mode 1)
-(setq show-paren-delay 0)
+;; customize programming mode:
+(add-hook 'prog-mode-hook 'highlight-numbers-mode)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'prog-mode-hook 'column-number-mode)
+(add-hook 'prog-mode-hook (lambda () (setq truncate-lines t)))
 
 ;; Verilog customizations
 ; - disable automatic indentation
@@ -252,7 +244,7 @@
 ;; TODO
 ;; - highlight TODOs
 ;; - set spellcheck
-;; - projectile
+;; - projectile (?)
 ;; - rectangular selection
 ;; - ibuffer list customization
 ;; - autocomplete
