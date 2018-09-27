@@ -26,7 +26,7 @@
 
 ;; load local path
 (when (file-exists-p "~/.emacs.d/lisp/")
-    (add-to-list 'load-path "~/.emacs.d/lisp/"))
+  (add-to-list 'load-path "~/.emacs.d/lisp/"))
 
 ;; evil mode
 ; set variables needed before loading evil
@@ -94,7 +94,6 @@
     ((> (buffer-size) 1000000000) (format "%7.1fG" (/ (buffer-size) 1000000000.0)))
     ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
     ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
-
     (t (format "%8d" (buffer-size)))))
 ; - customize column size
 (setq ibuffer-formats
@@ -163,8 +162,8 @@
 
 ;; do not set the background when opened in terminal
 (defun on-after-init ()
-    (unless (display-graphic-p (selected-frame))
-          (set-face-background 'default "unspecified-bg" (selected-frame))))
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
 (add-hook 'window-setup-hook 'on-after-init)
 
 ;; customize programming mode:
@@ -206,11 +205,11 @@
 (add-hook 'verilog-mode-hook '(lambda () (setq-local evil-auto-indent nil)))
 ; - load veri-kompass
 (when (file-exists-p "~/veri-kompass/")
-    (add-to-list 'load-path "~/veri-kompass/")
+  (add-to-list 'load-path "~/veri-kompass/")
   (require 'veri-kompass-mode))
 ; - load smime
 (when (file-exists-p "~/midas/etc/SMIME/")
-    (add-to-list 'load-path "~/midas/etc/SMIME/")
+  (add-to-list 'load-path "~/midas/etc/SMIME/")
   (require 'smime))
 
 ;; Shell customizations
