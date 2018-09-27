@@ -13,6 +13,7 @@
                      helm
                      highlight-numbers
                      magit
+                     transpose-frame
                      undo-tree))
 
 (package-initialize)
@@ -113,16 +114,21 @@
 ; - move between windows
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
-; - move in window configuration history
-(when (fboundp 'winner-mode)
-  (winner-mode 1)
-  (global-set-key (kbd "C-c C-<left>") 'winner-undo)
-  (global-set-key (kbd "C-c C-<right>") 'winner-redo))
 ; - resize windows
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
+; - move in window configuration history
+(when (fboundp 'winner-mode)
+  (winner-mode 1)
+  (global-set-key (kbd "C-c C-<left>") 'winner-undo)
+  (global-set-key (kbd "C-c C-<right>") 'winner-redo))
+; - rotate/flip splits in current frame
+(when (fboundp 'transpose-frame)
+  (global-set-key (kbd "C-c S-<up>") 'flip-frame)
+  (global-set-key (kbd "C-c S-<left>") 'flop-frame)
+  (global-set-key (kbd "C-c S-<right>") 'rotate-frame-clockwise))
 
 ;; disable graphic features
 ;  - startup message
