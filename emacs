@@ -50,6 +50,8 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; do not pop up dialog boxes even if running with gui
 (setq use-dialog-box nil)
+;; enable narrow-to-region
+(put 'narrow-to-region 'disabled nil)
 ;; increase garbage collection threshold to 20MB
 (setq gc-cons-threshold 20000000)
 ;; do not create backup/autosave files
@@ -336,3 +338,4 @@
 ;; - wdired ?
 ;; - projectile ?
 ;; - undo-tree-mode ?
+;; - beacon ?
