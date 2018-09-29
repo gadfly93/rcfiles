@@ -255,7 +255,7 @@
       (mode . woman-mode)))
     ("data" (or
       (filename . ".*\\.\\([ct]sv\\|dat\\)$")))
-    ("misc" (name . "^\\*[0-9A-Za-z_]+\\*$"))))))
+    ("misc" (name . "^\\*.+\\*$"))))))
 (add-hook 'ibuffer-mode-hook
   (lambda () (ibuffer-switch-to-saved-filter-groups "default")))
 (setq ibuffer-show-empty-filter-groups nil)
