@@ -140,7 +140,8 @@
 
 ;; helm
 (global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
+; prefer ido to helm for buffer list because of ido-other-window
+;(global-set-key (kbd "C-x b") 'helm-buffers-list)
 ; - always open helm buffers in a bottom split
 (add-to-list 'display-buffer-alist
   `(,(rx bos "*helm" (* not-newline) "*" eos)
