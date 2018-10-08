@@ -108,8 +108,10 @@
 (global-evil-visualstar-mode)
 ; use faces instead of overlays for search highlight
 ; as they properly handle editing and region select
+(setq-default font-lock-keywords-case-fold-search t)
 (defun evil-ex-hl-active-overlay-to-face (&optional unused1 unused2)
   (when (evil-ex-hl-active-p 'evil-ex-search)
+    (unhighlight-last)
     (evil-ex-delete-hl 'evil-ex-search)
     (highlight-regexp (evil-ex-pattern-regex evil-ex-search-pattern) 'lazy-highlight)))
 (advice-add 'evil-ex-start-search :after #'evil-ex-hl-active-overlay-to-face)
@@ -117,7 +119,8 @@
 ; spacebar removes highlight
 (defun unhighlight-last ()
   (interactive)
-  (unhighlight-regexp (caar hi-lock-interactive-patterns)))
+  (when (equal (cadr (cadr (cadar hi-lock-interactive-patterns))) 'lazy-highlight)
+    (unhighlight-regexp (caar hi-lock-interactive-patterns))))
 (define-key evil-motion-state-map (kbd "SPC") 'unhighlight-last)
 ; setup leader
 (setq evil-leader/in-all-states 1)
