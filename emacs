@@ -157,6 +157,7 @@
 (require 'ido)
 (require 'ido-other-window)
 (ido-mode t)
+(setq ido-default-file-method 'maybe-frame)
 
 ;; projectile
 (require 'projectile)
