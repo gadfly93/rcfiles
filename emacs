@@ -13,6 +13,7 @@
                      helm
                      highlight-numbers
                      magit
+                     projectile
                      transpose-frame
                      undo-tree))
 
@@ -156,6 +157,11 @@
 (require 'ido)
 (require 'ido-other-window)
 (ido-mode t)
+
+;; projectile
+(require 'projectile)
+(projectile-global-mode)
+(global-set-key (kbd "C-S-x C-S-f") 'projectile-find-file)
 
 ;; dired
 (setq dired-listing-switches "-alh")
@@ -340,6 +346,5 @@
 ;; - multiple cursors: evil-mc
 ;; - tags
 ;; - wdired ?
-;; - projectile ?
 ;; - undo-tree-mode ?
 ;; - beacon ?
